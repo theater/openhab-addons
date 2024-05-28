@@ -37,7 +37,7 @@ public class TestX1BoostAirMiniDataParser extends AbstractParserTest {
                     2,15569,0,7,0,0,0,0,0,0,
                     0,0,0,0,0,0,0,0,0,0,
                     0,0,0,0,0,0,0,0,0,13,
-                    0,4071,0,3456,0,0,0,0,0,0,
+                    0,4071,0,3456,0,0,0,0,500,0,
                     0,0,0,0,0,23,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
                 ],
                 Information:[1.500,4,XM3A15IA669518,8,2.27,0.00,1.43,0.00,0.00,1]}
@@ -70,6 +70,7 @@ public class TestX1BoostAirMiniDataParser extends AbstractParserTest {
         assertEquals(0.7, data.getTodayEnergy()); // [13]
 
         assertEquals(346, data.getPowerUsage()); // [43]
+        assertEquals(500, data.getFeedInPower()); // [43]
     }
 
     @Override

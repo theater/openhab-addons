@@ -92,4 +92,9 @@ public class X1BoostAirMiniInverterData extends CommonLocalInverterData {
     public short getPowerUsage() {
         return (short) Math.round((double) getData(43) / 10);
     }
+
+    @Override
+    public short getFeedInPower() {
+        return getData(48);
+    }
 }
