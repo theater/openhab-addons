@@ -39,6 +39,11 @@ public class LocalConnectRawDataBean implements RawDataBean {
     private String @Nullable [] information;
     private @Nullable String rawData;
 
+    @SerializedName("OCPPServer")
+    private @Nullable String ocppServer;
+    @SerializedName("OCPPChargerId")
+    private @Nullable String ocppChargerId;
+
     @Override
     public String toString() {
         return "LocalConnectRawDataBean [sn=" + sn + ", ver=" + ver + ", type=" + type + ", Information="
@@ -93,6 +98,22 @@ public class LocalConnectRawDataBean implements RawDataBean {
     @Override
     public void setRawData(String rawData) {
         this.rawData = rawData;
+    }
+
+    public String getOcppServer() {
+        return ocppServer;
+    }
+
+    public void setOcppServer(String ocppServer) {
+        this.ocppServer = ocppServer;
+    }
+
+    public String getOcppChargerId() {
+        return ocppChargerId;
+    }
+
+    public void setOcppChargerId(String ocppChargerId) {
+        this.ocppChargerId = ocppChargerId;
     }
 
     public static LocalConnectRawDataBean fromJson(String json) {

@@ -1,0 +1,49 @@
+/**
+ * Copyright (c) 2010-2024 Contributors to the openHAB project
+ *
+ * See the NOTICE file(s) distributed with this work for additional
+ * information.
+ *
+ * This program and the accompanying materials are made available under the
+ * terms of the Eclipse Public License 2.0 which is available at
+ * http://www.eclipse.org/legal/epl-2.0
+ *
+ * SPDX-License-Identifier: EPL-2.0
+ */
+package org.openhab.binding.solax.internal.model.local.parsers;
+
+import static org.openhab.binding.solax.internal.SolaxBindingConstants.*;
+
+import java.util.Set;
+
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
+import org.openhab.binding.solax.internal.model.local.LocalInverterData;
+import org.openhab.binding.solax.internal.model.local.X1BoostAirMiniInverterData;
+
+/**
+ * The {@link EvChargerDataParser} is the implementation that parses raw data into a LocalInverterData for the
+ * X1 Mini / X1 Air Mini or X1 Boost Mini inverter.
+ *
+ * @author Konstantin Polihronov - Initial contribution
+ */
+@NonNullByDefault
+public class EvChargerDataParser implements RawDataParser {
+
+    private static final Set<String> EV_CHARGER_SUPPORTED_CHANNELS = Set.of(CHANNEL_RAW_DATA,
+            CHANNEL_INVERTER_OUTPUT_POWER_PHASE1, CHANNEL_INVERTER_OUTPUT_POWER_PHASE2,
+            CHANNEL_INVERTER_OUTPUT_POWER_PHASE3, CHANNEL_INVERTER_TOTAL_OUTPUT_POWER,
+            CHANNEL_INVERTER_OUTPUT_CURRENT_PHASE1, CHANNEL_INVERTER_OUTPUT_CURRENT_PHASE2,
+            CHANNEL_INVERTER_OUTPUT_CURRENT_PHASE3, CHANNEL_INVERTER_OUTPUT_VOLTAGE_PHASE1,
+            CHANNEL_INVERTER_OUTPUT_VOLTAGE_PHASE2, CHANNEL_INVERTER_OUTPUT_VOLTAGE_PHASE3);
+
+    @Override
+    public LocalInverterData getData(LocalConnectRawDataBean bean) {
+        return new X1BoostAirMiniInverterData(bean);
+    }
+
+    @Override
+    public Set<String> getSupportedChannels() {
+        return EV_CHARGER_SUPPORTED_CHANNELS;
+    }
+}

@@ -53,21 +53,12 @@ import com.google.gson.JsonParseException;
  * @author Konstantin Polihronov - Initial contribution
  */
 @NonNullByDefault
-public class SolaxLocalAccessHandler extends AbstractSolaxHandler {
+public class SolaxLocalAccessHandler extends SolaxLocalAccessAbstractHandler {
 
     private final Logger logger = LoggerFactory.getLogger(SolaxLocalAccessHandler.class);
 
-    private boolean alreadyRemovedUnsupportedChannels;
-
-    private final Set<String> unsupportedExistingChannels = new HashSet<>();
-
     public SolaxLocalAccessHandler(Thing thing, TranslationProvider i18nProvider, TimeZoneProvider timeZoneProvider) {
         super(thing, i18nProvider, timeZoneProvider);
-    }
-
-    @Override
-    protected SolaxConnector createConnector(SolaxConfiguration config) {
-        return new LocalHttpConnector(config.password, config.hostname);
     }
 
     @Override
@@ -94,12 +85,6 @@ public class SolaxLocalAccessHandler extends AbstractSolaxHandler {
             logger.debug("Unable to deserialize from JSON.", e);
             updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR, e.getMessage());
         }
-    }
-
-    private LocalConnectRawDataBean parseJson(String rawJsonData) {
-        LocalConnectRawDataBean fromJson = LocalConnectRawDataBean.fromJson(rawJsonData);
-        logger.debug("Received a new inverter JSON object. Data = {}", fromJson.toString());
-        return fromJson;
     }
 
     private InverterType calculateInverterType(LocalConnectRawDataBean rawDataBean) {
@@ -221,43 +206,5 @@ public class SolaxLocalAccessHandler extends AbstractSolaxHandler {
 
         // Binding provided data
         updateState(SolaxBindingConstants.CHANNEL_TIMESTAMP, new DateTimeType(ZonedDateTime.now()));
-    }
-
-    private void removeUnsupportedChannels(Set<String> supportedChannels) {
-        if (supportedChannels.isEmpty()) {
-            return;
-        }
-        List<Channel> channels = getThing().getChannels();
-        List<Channel> channelsToRemove = channels.stream()
-                .filter(channel -> !supportedChannels.contains(channel.getUID().getId())).toList();
-
-        if (!channelsToRemove.isEmpty()) {
-            if (logger.isDebugEnabled()) {
-                logRemovedChannels(channelsToRemove);
-            }
-            updateThing(editThing().withoutChannels(channelsToRemove).build());
-        }
-    }
-
-    private void logRemovedChannels(List<Channel> channelsToRemove) {
-        List<String> channelsToRemoveForLog = channelsToRemove.stream().map(channel -> channel.getUID().getId())
-                .toList();
-        logger.debug("Detected unsupported channels for the current inverter. Channels to be removed: {}",
-                channelsToRemoveForLog);
-    }
-
-    private <T extends Quantity<T>> void updateChannel(String channelID, double value, Unit<T> unit,
-            Set<String> supportedChannels) {
-        if (supportedChannels.contains(channelID)) {
-            if (value > Short.MIN_VALUE) {
-                updateState(channelID, new QuantityType<>(value, unit));
-            } else if (!unsupportedExistingChannels.contains(channelID)) {
-                updateState(channelID, UnDefType.UNDEF);
-                unsupportedExistingChannels.add(channelID);
-                logger.warn(
-                        "Channel {} is marked as supported, but its value is out of the defined range. Value = {}. This is unexpected behaviour. Please file a bug.",
-                        channelID, value);
-            }
-        }
     }
 }

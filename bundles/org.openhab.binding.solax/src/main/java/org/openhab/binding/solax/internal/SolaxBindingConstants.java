@@ -28,16 +28,19 @@ public class SolaxBindingConstants {
 
     public static final String BINDING_ID = "solax";
     private static final String THING_LOCAL_CONNECT_INVERTER_ID = "local-connect-inverter";
+    private static final String THING_LOCAL_CONNECT_CHARGER_ID = "local-connect-charger";
     private static final String THING_CLOUD_CONNECT_INVERTER_ID = "cloud-connect-inverter";
 
     // List of all Thing Type UIDs
     public static final ThingTypeUID THING_TYPE_LOCAL_CONNECT_INVERTER = new ThingTypeUID(BINDING_ID,
             THING_LOCAL_CONNECT_INVERTER_ID);
+    public static final ThingTypeUID THING_TYPE_LOCAL_CONNECT_CHARGER = new ThingTypeUID(BINDING_ID,
+            THING_LOCAL_CONNECT_CHARGER_ID);
     public static final ThingTypeUID THING_TYPE_CLOUD_CONNECT_INVERTER = new ThingTypeUID(BINDING_ID,
             THING_CLOUD_CONNECT_INVERTER_ID);
 
     public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Set.of(THING_TYPE_LOCAL_CONNECT_INVERTER,
-            THING_TYPE_CLOUD_CONNECT_INVERTER);
+            THING_TYPE_LOCAL_CONNECT_CHARGER, THING_TYPE_CLOUD_CONNECT_INVERTER);
 
     // List of properties
     public static final String PROPERTY_INVERTER_TYPE = "inverterType";
