@@ -56,7 +56,7 @@ public abstract class CommonLocalInverterData implements LocalInverterData {
         return InverterType.fromIndex(data.getType());
     }
 
-    protected short getData(int index) {
+    protected Short getFromRawData(int index) {
         try {
             short[] dataArray = data.getData();
             if (dataArray != null) {
@@ -69,12 +69,17 @@ public abstract class CommonLocalInverterData implements LocalInverterData {
     }
 
     public long packU16(int indexMajor, int indexMinor) {
-        short major = getData(indexMajor);
-        short minor = getData(indexMinor);
+        short major = getFromRawData(indexMajor);
+        short minor = getFromRawData(indexMinor);
         if (major == 0) {
             return minor;
         }
 
         return Integer.toUnsignedLong(major << 16 | minor & 0xFFFF);
+    }
+
+    @Override
+    public LocalConnectRawDataBean getData() {
+        return data;
     }
 }
