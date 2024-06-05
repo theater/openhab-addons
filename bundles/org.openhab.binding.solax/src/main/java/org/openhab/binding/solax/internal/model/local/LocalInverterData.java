@@ -14,6 +14,7 @@ package org.openhab.binding.solax.internal.model.local;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 import org.openhab.binding.solax.internal.model.InverterType;
 
 /**
@@ -25,15 +26,23 @@ import org.openhab.binding.solax.internal.model.InverterType;
 public interface LocalInverterData {
 
     @Nullable
-    String getWifiSerial();
+    default String getWifiSerial() {
+        return getData().getSn();
+    }
 
     @Nullable
-    String getWifiVersion();
+    default String getWifiVersion() {
+        return getData().getVer();
+    }
 
     InverterType getInverterType();
 
     @Nullable
-    String getRawData();
+    default String getRawData() {
+        return getData().getRawData();
+    }
+
+    LocalConnectRawDataBean getData();
 
     default double getPV1Voltage() {
         return Short.MIN_VALUE;
