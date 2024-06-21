@@ -1,5 +1,12 @@
 package org.openhab.binding.solax.internal.handlers;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.measure.Quantity;
+import javax.measure.Unit;
+
 import org.openhab.binding.solax.internal.SolaxConfiguration;
 import org.openhab.binding.solax.internal.connectivity.LocalHttpConnector;
 import org.openhab.binding.solax.internal.connectivity.SolaxConnector;
@@ -13,19 +20,14 @@ import org.openhab.core.types.UnDefType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.measure.Quantity;
-import javax.measure.Unit;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public abstract class SolaxLocalAccessAbstractHandler extends AbstractSolaxHandler {
     private final Logger logger = LoggerFactory.getLogger(SolaxLocalAccessAbstractHandler.class);
 
     protected final Set<String> unsupportedExistingChannels = new HashSet<>();
     protected boolean alreadyRemovedUnsupportedChannels;
 
-    public SolaxLocalAccessAbstractHandler(Thing thing, TranslationProvider i18nProvider, TimeZoneProvider timeZoneProvider) {
+    public SolaxLocalAccessAbstractHandler(Thing thing, TranslationProvider i18nProvider,
+            TimeZoneProvider timeZoneProvider) {
         super(thing, i18nProvider, timeZoneProvider);
     }
 
@@ -64,7 +66,7 @@ public abstract class SolaxLocalAccessAbstractHandler extends AbstractSolaxHandl
     }
 
     protected <T extends Quantity<T>> void updateChannel(String channelID, double value, Unit<T> unit,
-                                                       Set<String> supportedChannels) {
+            Set<String> supportedChannels) {
         if (supportedChannels.contains(channelID)) {
             if (value > Short.MIN_VALUE) {
                 updateState(channelID, new QuantityType<>(value, unit));

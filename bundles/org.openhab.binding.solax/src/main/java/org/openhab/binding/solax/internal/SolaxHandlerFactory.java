@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.openhab.binding.solax.internal.handlers.SolaxCloudHandler;
 import org.openhab.binding.solax.internal.handlers.SolaxLocalAccessChargerHandler;
-import org.openhab.binding.solax.internal.handlers.SolaxLocalAccessHandler;
+import org.openhab.binding.solax.internal.handlers.SolaxLocalAccessInverterHandler;
 import org.openhab.core.i18n.LocaleProvider;
 import org.openhab.core.i18n.TimeZoneProvider;
 import org.openhab.core.i18n.TranslationProvider;
@@ -62,7 +62,7 @@ public class SolaxHandlerFactory extends BaseThingHandlerFactory {
     protected @Nullable ThingHandler createHandler(Thing thing) {
         ThingTypeUID thingTypeUID = thing.getThingTypeUID();
         if (THING_TYPE_LOCAL_CONNECT_INVERTER.equals(thingTypeUID)) {
-            return new SolaxLocalAccessHandler(thing, i18nProvider, timeZoneProvider);
+            return new SolaxLocalAccessInverterHandler(thing, i18nProvider, timeZoneProvider);
         } else if (THING_TYPE_CLOUD_CONNECT_INVERTER.equals(thingTypeUID)) {
             return new SolaxCloudHandler(thing, i18nProvider, timeZoneProvider, localeProvider);
         } else if (THING_TYPE_LOCAL_CONNECT_CHARGER.equals(thingTypeUID)) {

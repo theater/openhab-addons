@@ -13,18 +13,10 @@
 package org.openhab.binding.solax.internal.handlers;
 
 import java.time.ZonedDateTime;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import javax.measure.Quantity;
-import javax.measure.Unit;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.SolaxBindingConstants;
-import org.openhab.binding.solax.internal.SolaxConfiguration;
-import org.openhab.binding.solax.internal.connectivity.LocalHttpConnector;
-import org.openhab.binding.solax.internal.connectivity.SolaxConnector;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 import org.openhab.binding.solax.internal.model.InverterType;
 import org.openhab.binding.solax.internal.model.local.LocalInverterData;
@@ -32,32 +24,29 @@ import org.openhab.binding.solax.internal.model.local.parsers.RawDataParser;
 import org.openhab.core.i18n.TimeZoneProvider;
 import org.openhab.core.i18n.TranslationProvider;
 import org.openhab.core.library.types.DateTimeType;
-import org.openhab.core.library.types.QuantityType;
 import org.openhab.core.library.types.StringType;
 import org.openhab.core.library.unit.SIUnits;
 import org.openhab.core.library.unit.Units;
-import org.openhab.core.thing.Channel;
 import org.openhab.core.thing.Thing;
 import org.openhab.core.thing.ThingStatus;
 import org.openhab.core.thing.ThingStatusDetail;
-import org.openhab.core.types.UnDefType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonParseException;
 
 /**
- * The {@link SolaxLocalAccessHandler} is responsible for handling commands, which are
+ * The {@link SolaxLocalAccessInverterHandler} is responsible for handling commands, which are
  * sent to one of the channels.
  *
  * @author Konstantin Polihronov - Initial contribution
  */
 @NonNullByDefault
-public class SolaxLocalAccessHandler extends SolaxLocalAccessAbstractHandler {
+public class SolaxLocalAccessInverterHandler extends SolaxLocalAccessAbstractHandler {
 
-    private final Logger logger = LoggerFactory.getLogger(SolaxLocalAccessHandler.class);
+    private final Logger logger = LoggerFactory.getLogger(SolaxLocalAccessInverterHandler.class);
 
-    public SolaxLocalAccessHandler(Thing thing, TranslationProvider i18nProvider, TimeZoneProvider timeZoneProvider) {
+    public SolaxLocalAccessInverterHandler(Thing thing, TranslationProvider i18nProvider, TimeZoneProvider timeZoneProvider) {
         super(thing, i18nProvider, timeZoneProvider);
     }
 

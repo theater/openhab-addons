@@ -12,16 +12,11 @@
  */
 package org.openhab.binding.solax.internal.local;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.junit.jupiter.api.Test;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
-import org.openhab.binding.solax.internal.model.InverterType;
-import org.openhab.binding.solax.internal.model.local.LocalInverterData;
-import org.openhab.binding.solax.internal.model.local.parsers.RawDataParser;
-
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * The {@link TestEVChargerParser} Simple test that tests for proper parsing against a real data from the inverter
