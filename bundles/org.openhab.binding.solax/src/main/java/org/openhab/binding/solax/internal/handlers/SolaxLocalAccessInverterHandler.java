@@ -46,7 +46,8 @@ public class SolaxLocalAccessInverterHandler extends SolaxLocalAccessAbstractHan
 
     private final Logger logger = LoggerFactory.getLogger(SolaxLocalAccessInverterHandler.class);
 
-    public SolaxLocalAccessInverterHandler(Thing thing, TranslationProvider i18nProvider, TimeZoneProvider timeZoneProvider) {
+    public SolaxLocalAccessInverterHandler(Thing thing, TranslationProvider i18nProvider,
+            TimeZoneProvider timeZoneProvider) {
         super(thing, i18nProvider, timeZoneProvider);
     }
 

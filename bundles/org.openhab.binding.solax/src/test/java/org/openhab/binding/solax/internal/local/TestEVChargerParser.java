@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.junit.jupiter.api.Test;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
+import org.openhab.binding.solax.internal.model.local.EvChargerData;
 
 /**
  * The {@link TestEVChargerParser} Simple test that tests for proper parsing against a real data from the inverter
@@ -48,7 +49,7 @@ public class TestEVChargerParser {
             """;
     private static final String RAW_DATA_SECOND = """
             {
-                "SN":"SQXXXXXXXXXX",
+                "SN":"SQBLABLA",
                 "ver":"3.004.11",
                 "type":1,
                 "Data":[
@@ -69,7 +70,31 @@ public class TestEVChargerParser {
 
     @Test
     public void testParser() {
-        LocalConnectRawDataBean bean = LocalConnectRawDataBean.fromJson(RAW_DATA);
+        LocalConnectRawDataBean bean = LocalConnectRawDataBean.fromJson(RAW_DATA_SECOND);
         assertNotNull(bean);
+
+        EvChargerData data = new EvChargerData(bean);
+        assertEquals("SQBLABLA", data.getWifiSerial()); // 0
+        assertEquals("3.004.11", data.getWifiVersion()); // 1
+
+        assertEquals(239.14, data.getVoltagePhase1()); // 2
+        assertEquals(239.91, data.getVoltagePhase2()); // 3
+        assertEquals(238.95, data.getVoltagePhase3()); // 4
+
+        assertEquals(15.17, data.getCurrentPhase1()); // 5
+        assertEquals(15.13, data.getCurrentPhase2()); // 6
+        assertEquals(15.19, data.getCurrentPhase3()); // 7
+
+        assertEquals(3654, data.getOutputPowerPhase1()); // 8
+        assertEquals(3657, data.getOutputPowerPhase2()); // 9
+        assertEquals(3656, data.getOutputPowerPhase3()); // 10
+
+        assertEquals(-1.02, data.getExternalCurrentPhase1()); // 16
+        assertEquals(-300.73, data.getExternalCurrentPhase2()); // 17
+        assertEquals(-0.77, data.getExternalCurrentPhase3()); // 18
+
+        assertEquals(-28, data.getExternalPowerPhase1()); // 19
+        assertEquals(-23, data.getExternalPowerPhase2()); // 20
+        assertEquals(27, data.getExternalPowerPhase3()); // 21
     }
 }

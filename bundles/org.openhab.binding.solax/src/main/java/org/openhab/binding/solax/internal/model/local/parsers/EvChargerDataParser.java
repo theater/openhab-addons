@@ -18,8 +18,8 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
+import org.openhab.binding.solax.internal.model.local.EvChargerData;
 import org.openhab.binding.solax.internal.model.local.LocalInverterData;
-import org.openhab.binding.solax.internal.model.local.X1BoostAirMiniInverterData;
 
 /**
  * The {@link EvChargerDataParser} is the implementation that parses raw data into a LocalInverterData for the
@@ -39,7 +39,7 @@ public class EvChargerDataParser implements RawDataParser {
 
     @Override
     public LocalInverterData getData(LocalConnectRawDataBean bean) {
-        return new X1BoostAirMiniInverterData(bean);
+        return new EvChargerData(bean);
     }
 
     @Override

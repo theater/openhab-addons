@@ -30,86 +30,86 @@ public class X1HybridG4InverterData extends CommonLocalInverterData {
 
     @Override
     public double getInverterVoltage() {
-        return ((double) getData(0)) / 10;
+        return ((double) getFromRawData(0)) / 10;
     }
 
     @Override
     public double getInverterCurrent() {
-        return ((double) getData(1)) / 10;
+        return ((double) getFromRawData(1)) / 10;
     }
 
     @Override
     public short getInverterOutputPower() {
-        return getData(2);
+        return getFromRawData(2);
     }
 
     @Override
     public double getInverterFrequency() {
-        return ((double) getData(3)) / 100;
+        return ((double) getFromRawData(3)) / 100;
     }
 
     @Override
     public short getFeedInPower() {
-        return getData(32);
+        return getFromRawData(32);
     }
 
     @Override
     public double getPV1Voltage() {
-        return ((double) getData(4)) / 10;
+        return ((double) getFromRawData(4)) / 10;
     }
 
     @Override
     public double getPV2Voltage() {
-        return ((double) getData(5)) / 10;
+        return ((double) getFromRawData(5)) / 10;
     }
 
     @Override
     public double getPV1Current() {
-        return ((double) getData(6)) / 10;
+        return ((double) getFromRawData(6)) / 10;
     }
 
     @Override
     public double getPV2Current() {
-        return ((double) getData(7)) / 10;
+        return ((double) getFromRawData(7)) / 10;
     }
 
     @Override
     public short getPV1Power() {
-        return getData(8);
+        return getFromRawData(8);
     }
 
     @Override
     public short getPV2Power() {
-        return getData(9);
+        return getFromRawData(9);
     }
 
     @Override
     public double getBatteryVoltage() {
-        return ((double) getData(14)) / 100;
+        return ((double) getFromRawData(14)) / 100;
     }
 
     @Override
     public double getBatteryCurrent() {
-        return ((double) getData(15)) / 100;
+        return ((double) getFromRawData(15)) / 100;
     }
 
     @Override
     public short getBatteryPower() {
-        return getData(16);
+        return getFromRawData(16);
     }
 
     @Override
     public short getBatteryTemperature() {
-        return getData(17);
+        return getFromRawData(17);
     }
 
     @Override
     public short getBatteryLevel() {
-        return getData(18);
+        return getFromRawData(18);
     }
 
     @Override
     public short getInverterWorkModeCode() {
-        return getData(10);
+        return getFromRawData(10);
     }
 }

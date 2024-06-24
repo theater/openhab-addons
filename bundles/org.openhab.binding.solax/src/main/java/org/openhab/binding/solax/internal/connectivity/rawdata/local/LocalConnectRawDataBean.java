@@ -1,13 +1,13 @@
 /**
  * Copyright (c) 2010-2024 Contributors to the openHAB project
- *
+ * <p>
  * See the NOTICE file(s) distributed with this work for additional
  * information.
- *
+ * <p>
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
- *
+ * <p>
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.openhab.binding.solax.internal.connectivity.rawdata.local;
@@ -30,6 +30,7 @@ import com.google.gson.annotations.SerializedName;
 @NonNullByDefault
 public class LocalConnectRawDataBean implements RawDataBean {
 
+    @SerializedName(value = "sn", alternate = { "SN" })
     private @Nullable String sn;
     private @Nullable String ver;
     private int type;
@@ -38,7 +39,6 @@ public class LocalConnectRawDataBean implements RawDataBean {
     @SerializedName("Information")
     private String @Nullable [] information;
     private @Nullable String rawData;
-
     @SerializedName("OCPPServer")
     private @Nullable String ocppServer;
     @SerializedName("OCPPChargerId")
@@ -100,15 +100,15 @@ public class LocalConnectRawDataBean implements RawDataBean {
         this.rawData = rawData;
     }
 
-    public String getOcppServer() {
+    public @Nullable String getOcppServer() {
         return ocppServer;
     }
 
-    public void setOcppServer(String ocppServer) {
+    public void setOcppServer(@Nullable String ocppServer) {
         this.ocppServer = ocppServer;
     }
 
-    public String getOcppChargerId() {
+    public @Nullable String getOcppChargerId() {
         return ocppChargerId;
     }
 

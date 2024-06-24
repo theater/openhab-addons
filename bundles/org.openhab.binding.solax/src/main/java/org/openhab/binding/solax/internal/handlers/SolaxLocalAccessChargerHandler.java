@@ -9,7 +9,6 @@ import org.openhab.core.i18n.TimeZoneProvider;
 import org.openhab.core.i18n.TranslationProvider;
 import org.openhab.core.thing.Thing;
 
-
 public class SolaxLocalAccessChargerHandler extends SolaxLocalAccessAbstractHandler {
 
     private static final RawDataParser parser = new EvChargerDataParser();

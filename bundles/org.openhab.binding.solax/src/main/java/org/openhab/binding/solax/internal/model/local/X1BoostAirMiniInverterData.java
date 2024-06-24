@@ -30,66 +30,66 @@ public class X1BoostAirMiniInverterData extends CommonLocalInverterData {
 
     @Override
     public double getInverterVoltage() {
-        return (double) getData(0) / 10;
+        return (double) getFromRawData(0) / 10;
     }
 
     @Override
     public double getInverterCurrent() {
-        return (double) getData(1) / 10;
+        return (double) getFromRawData(1) / 10;
     }
 
     @Override
     public short getInverterOutputPower() {
-        return getData(2);
+        return getFromRawData(2);
     }
 
     @Override
     public double getPV1Voltage() {
-        return (double) getData(3) / 10;
+        return (double) getFromRawData(3) / 10;
     }
 
     @Override
     public double getPV2Voltage() {
-        return (double) getData(4) / 10;
+        return (double) getFromRawData(4) / 10;
     }
 
     @Override
     public double getPV1Current() {
-        return (double) getData(5) / 10;
+        return (double) getFromRawData(5) / 10;
     }
 
     @Override
     public double getPV2Current() {
-        return (double) getData(6) / 10;
+        return (double) getFromRawData(6) / 10;
     }
 
     @Override
     public short getPV1Power() {
-        return getData(7);
+        return getFromRawData(7);
     }
 
     @Override
     public short getPV2Power() {
-        return getData(8);
+        return getFromRawData(8);
     }
 
     @Override
     public double getInverterFrequency() {
-        return (double) getData(9) / 100;
+        return (double) getFromRawData(9) / 100;
     }
 
     @Override
     public double getTotalEnergy() {
-        return (double) getData(11) / 10;
+        return (double) getFromRawData(11) / 10;
     }
 
     @Override
     public double getTodayEnergy() {
-        return (double) getData(13) / 10;
+        return (double) getFromRawData(13) / 10;
     }
 
     @Override
     public short getPowerUsage() {
-        return (short) Math.round((double) getData(43) / 10);
+        return (short) Math.round((double) getFromRawData(43) / 10);
     }
 }
