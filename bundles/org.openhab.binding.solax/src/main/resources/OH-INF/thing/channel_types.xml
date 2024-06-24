@@ -124,5 +124,15 @@
 			</options>
 		</state>
 	</channel-type>
+	<channel-type id="charger-temperature">
+		<item-type>Number:Temperature</item-type>
+		<label>Charger Temperature</label>
+		<description>Charger Temperature</description>
+		<tags>
+			<tag>Measurement</tag>
+			<tag>Temperature</tag>
+		</tags>
+		<state pattern="%d %unit%" readOnly="true"/>
+	</channel-type>
 
 </thing:thing-descriptions>

@@ -36,8 +36,7 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.JsonParseException;
 
 /**
- * The {@link SolaxLocalAccessInverterHandler} is responsible for handling commands, which are
- * sent to one of the channels.
+ * The {@link SolaxLocalAccessInverterHandler} the handler for the inverter
  *
  * @author Konstantin Polihronov - Initial contribution
  */

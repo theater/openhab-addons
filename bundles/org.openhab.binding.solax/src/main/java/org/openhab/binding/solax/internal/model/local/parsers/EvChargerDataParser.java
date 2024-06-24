@@ -19,7 +19,6 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 import org.openhab.binding.solax.internal.model.local.EvChargerData;
-import org.openhab.binding.solax.internal.model.local.LocalInverterData;
 
 /**
  * The {@link EvChargerDataParser} is the implementation that parses raw data into a LocalInverterData for the
@@ -38,7 +37,7 @@ public class EvChargerDataParser implements RawDataParser {
             CHANNEL_INVERTER_OUTPUT_VOLTAGE_PHASE2, CHANNEL_INVERTER_OUTPUT_VOLTAGE_PHASE3);
 
     @Override
-    public LocalInverterData getData(LocalConnectRawDataBean bean) {
+    public EvChargerData getData(LocalConnectRawDataBean bean) {
         return new EvChargerData(bean);
     }
 
