@@ -15,6 +15,7 @@ package org.openhab.binding.solax.internal.model.local;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 import org.openhab.binding.solax.internal.model.InverterType;
+import org.openhab.binding.solax.internal.util.ByteUtil;
 
 /**
  * The {@link EvChargerData} is an abstract class that contains the common information, applicable for all
@@ -43,12 +44,11 @@ public class EvChargerData extends CommonLocalInverterData {
     }
 
     public double getEqSingle() {
-        return (double) getFromRawData(12) / 10;
+        return getFromRawData(12).doubleValue() / 10;
     }
 
-    public double getEqTotal() {
-        // TODO implement this
-        throw new UnsupportedOperationException("Not implemented");
+    public int getEqTotal() {
+        return ByteUtil.read32BitSigned(getFromRawData(14), getFromRawData(15));
     }
 
     public short getTotalChargePower() {
@@ -57,32 +57,32 @@ public class EvChargerData extends CommonLocalInverterData {
 
     @Override
     public double getVoltagePhase1() {
-        return ((double) getFromRawData(2)) / 100;
+        return getFromRawData(2).doubleValue() / 100;
     }
 
     @Override
     public double getVoltagePhase2() {
-        return ((double) getFromRawData(3)) / 100;
+        return getFromRawData(3).doubleValue() / 100;
     }
 
     @Override
     public double getVoltagePhase3() {
-        return ((double) getFromRawData(4)) / 100;
+        return getFromRawData(4).doubleValue() / 100;
     }
 
     @Override
     public double getCurrentPhase1() {
-        return ((double) getFromRawData(5)) / 100;
+        return getFromRawData(5).doubleValue() / 100;
     }
 
     @Override
     public double getCurrentPhase2() {
-        return ((double) getFromRawData(6)) / 100;
+        return getFromRawData(6).doubleValue() / 100;
     }
 
     @Override
     public double getCurrentPhase3() {
-        return ((double) getFromRawData(7)) / 100;
+        return getFromRawData(7).doubleValue() / 100;
     }
 
     @Override
@@ -101,31 +101,31 @@ public class EvChargerData extends CommonLocalInverterData {
     }
 
     public double getExternalCurrentPhase1() {
-        return read16BitSigned(16) / 100;
+        return getFromRawData(16).doubleValue() / 100;
     }
 
     public double getExternalCurrentPhase2() {
-        return read16BitSigned(17) / (double) 100;
+        return getFromRawData(17).doubleValue() / 100;
     }
 
     public double getExternalCurrentPhase3() {
-        return read16BitSigned(18) / 100;
+        return getFromRawData(18).doubleValue() / 100;
     }
 
     public double getExternalPowerPhase1() {
-        return read16BitSigned(19);
+        return getFromRawData(19).intValue();
     }
 
     public double getExternalPowerPhase2() {
-        return read16BitSigned(20);
+        return getFromRawData(20).intValue();
     }
 
     public double getExternalPowerPhase3() {
-        return read16BitSigned(21);
+        return getFromRawData(21).intValue();
     }
 
     public double getExternalTotalPower() {
-        return read16BitSigned(22);
+        return getFromRawData(22).intValue();
     }
 
     public short getPlugTemperature() {
@@ -140,9 +140,8 @@ public class EvChargerData extends CommonLocalInverterData {
         return getFromRawData(26);
     }
 
-    public double getChargingDuration() {
-        // TODO implement this
-        throw new UnsupportedOperationException("Not implemented");
+    public int getChargingDuration() {
+        return ByteUtil.read32BitSigned(getFromRawData(80), getFromRawData(81));
     }
 
     public short getOccpOfflineMode() {
@@ -159,22 +158,5 @@ public class EvChargerData extends CommonLocalInverterData {
 
     public short getTypeCharger() {
         return getFromRawData(89);
-    }
-
-    private double read32BitSigned(short a, short b) {
-        if (a < Short.MAX_VALUE) {
-            return b + 65536 * a;
-        } else {
-            return (double) b + 65536 * a - 0xFFFFFFFF;
-        }
-    }
-
-    private double read16BitSigned(int index) {
-        short a = getFromRawData(index);
-        if (a <= Short.MAX_VALUE) {
-            return a;
-        } else {
-            return a - 65536;
-        }
     }
 }

@@ -56,7 +56,7 @@ public abstract class CommonLocalInverterData implements LocalInverterData {
         return InverterType.fromIndex(data.getType());
     }
 
-    protected short getFromRawData(int index) {
+    protected Short getFromRawData(int index) {
         try {
             short[] dataArray = data.getData();
             if (dataArray != null) {

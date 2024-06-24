@@ -12,7 +12,8 @@
  */
 package org.openhab.binding.solax.internal.local;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.junit.jupiter.api.Test;
@@ -93,7 +94,7 @@ public class TestEVChargerParser {
         assertEquals(10968, data.getTotalChargePower()); // 11
 
         assertEquals(4.4, data.getEqSingle()); // 12
-        // assertEquals(???, data.getEqTotal()); // 14 and 15
+        assertEquals(22675456, data.getEqTotal()); // 14 and 15
 
         assertEquals(-1.02, data.getExternalCurrentPhase1()); // 16
         assertEquals(-300.73, data.getExternalCurrentPhase2()); // 17
@@ -109,7 +110,7 @@ public class TestEVChargerParser {
 
         assertEquals(2, data.getCPState()); // 26
 
-        // assertEquals(??? , data.getChargingDuration()); // 80 and 81
+        assertEquals(112525312, data.getChargingDuration()); // 80 and 81
 
         assertEquals(0, data.getOccpOfflineMode()); // 85
 
