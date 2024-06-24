@@ -1,13 +1,13 @@
 /**
  * Copyright (c) 2010-2024 Contributors to the openHAB project
- *
+ * <p>
  * See the NOTICE file(s) distributed with this work for additional
  * information.
- *
+ * <p>
  * This program and the accompanying materials are made available under the
  * terms of the Eclipse Public License 2.0 which is available at
  * http://www.eclipse.org/legal/epl-2.0
- *
+ * <p>
  * SPDX-License-Identifier: EPL-2.0
  */
 package org.openhab.binding.solax.internal.model.local;
@@ -124,6 +124,10 @@ public class EvChargerData extends CommonLocalInverterData {
         return read16BitSigned(21);
     }
 
+    public double getExternalTotalPower() {
+        return read16BitSigned(22);
+    }
+
     public short getPlugTemperature() {
         return getFromRawData(23);
     }
@@ -136,8 +140,26 @@ public class EvChargerData extends CommonLocalInverterData {
         return getFromRawData(26);
     }
 
-    // public double getChargingDuration() {
-    // }
+    public double getChargingDuration() {
+        // TODO implement this
+        throw new UnsupportedOperationException("Not implemented");
+    }
+
+    public short getOccpOfflineMode() {
+        return getFromRawData(85);
+    }
+
+    public short getTypePower() {
+        return getFromRawData(87);
+    }
+
+    public short getTypePhase() {
+        return getFromRawData(88);
+    }
+
+    public short getTypeCharger() {
+        return getFromRawData(89);
+    }
 
     private double read32BitSigned(short a, short b) {
         if (a < Short.MAX_VALUE) {

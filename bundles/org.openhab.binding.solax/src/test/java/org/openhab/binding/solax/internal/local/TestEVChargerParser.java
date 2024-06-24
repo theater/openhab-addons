@@ -61,7 +61,8 @@ public class TestEVChargerParser {
                     0,0,0,0,0,0,0,0,0,0,
                     0,0,0,0,0,0,0,0,0,0,
                     0,0,0,0,0,0,0,0,0,0,
-                    1717,0,3114,1547,6150,0,1,1,1,0,0,121,584,266,0,50,0,0,1,1,0],
+                    1717,0,3114,1547,6150,0,1,1,1,0,
+                    0,121,584,266,0,50,0,0,1,1,0],
                 "Information":[11.000,1,"CXXXXXXXXXX",1,1.13,1.01,0.00,0.00,0.00,1],
                 "OCPPServer":"",
                 "OCPPChargerId":""
@@ -89,6 +90,11 @@ public class TestEVChargerParser {
         assertEquals(3657, data.getOutputPowerPhase2()); // 9
         assertEquals(3656, data.getOutputPowerPhase3()); // 10
 
+        assertEquals(10968, data.getTotalChargePower()); // 11
+
+        assertEquals(4.4, data.getEqSingle()); // 12
+        // assertEquals(???, data.getEqTotal()); // 14 and 15
+
         assertEquals(-1.02, data.getExternalCurrentPhase1()); // 16
         assertEquals(-300.73, data.getExternalCurrentPhase2()); // 17
         assertEquals(-0.77, data.getExternalCurrentPhase3()); // 18
@@ -96,5 +102,19 @@ public class TestEVChargerParser {
         assertEquals(-28, data.getExternalPowerPhase1()); // 19
         assertEquals(-23, data.getExternalPowerPhase2()); // 20
         assertEquals(27, data.getExternalPowerPhase3()); // 21
+        assertEquals(402, data.getExternalTotalPower()); // 22
+
+        assertEquals(0, data.getPlugTemperature()); // 23
+        assertEquals(43, data.getInternalTemperature()); // 24
+
+        assertEquals(2, data.getCPState()); // 26
+
+        // assertEquals(??? , data.getChargingDuration()); // 80 and 81
+
+        assertEquals(0, data.getOccpOfflineMode()); // 85
+
+        assertEquals(1, data.getTypePower()); // 87
+        assertEquals(1, data.getTypePhase()); // 88
+        assertEquals(0, data.getTypeCharger()); // 89
     }
 }
