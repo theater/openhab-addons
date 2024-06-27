@@ -146,4 +146,5 @@ public class SolaxBindingConstants {
 
     // I18N Keys
     public static final String I18N_KEY_OFFLINE_COMMUNICATION_ERROR_JSON_CANNOT_BE_RETRIEVED = "@text/offline.communication-error.json-cannot-be-retrieved";
+    public static final String I18N_KEY_OFFLINE_CONFIGURATION_ERROR_JSON_CANNOT_BE_PARSED = "@text/offline.configuration-error.json-cannot-be-parsed";
 }
