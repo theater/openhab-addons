@@ -16,7 +16,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
-import org.openhab.binding.solax.internal.model.local.LocalInverterData;
+import org.openhab.binding.solax.internal.model.local.LocalData;
 
 /**
  * The {@link RawDataParser} declares generic parser implementation that parses raw data to generic inverter data which
@@ -27,7 +27,7 @@ import org.openhab.binding.solax.internal.model.local.LocalInverterData;
 @NonNullByDefault
 public interface RawDataParser {
 
-    LocalInverterData getData(LocalConnectRawDataBean bean);
+    LocalData getData(LocalConnectRawDataBean bean);
 
     Set<String> getSupportedChannels();
 }

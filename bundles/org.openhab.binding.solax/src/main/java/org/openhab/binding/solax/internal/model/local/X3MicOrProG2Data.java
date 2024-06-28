@@ -16,16 +16,16 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 
 /**
- * The {@link X3HybridG4InverterData} is responsible for handling commands, which are
+ * The {@link X3HybridG4Data} is responsible for handling commands, which are
  * sent to one of the channels.
  *
  * @author Henrik Tóth - Initial contribution
  *         (based on X1/X3 G4 parser from Konstantin Polihronov)
  */
 @NonNullByDefault
-public class X3MicOrProG2InverterData extends CommonLocalInverterData {
+public class X3MicOrProG2Data extends CommonLocalDeviceData {
 
-    public X3MicOrProG2InverterData(LocalConnectRawDataBean data) {
+    public X3MicOrProG2Data(LocalConnectRawDataBean data) {
         super(data);
     }
 

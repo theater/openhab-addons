@@ -20,19 +20,19 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * The {@link CommonLocalInverterData} is an abstract class that contains the common information, applicable for all
+ * The {@link CommonLocalDeviceData} is an abstract class that contains the common information, applicable for all
  * inverters.
  *
  * @author Konstantin Polihronov - Initial contribution
  */
 @NonNullByDefault
-public abstract class CommonLocalInverterData implements LocalInverterData {
+public abstract class CommonLocalDeviceData implements LocalData {
 
-    private final Logger logger = LoggerFactory.getLogger(CommonLocalInverterData.class);
+    private final Logger logger = LoggerFactory.getLogger(CommonLocalDeviceData.class);
 
     private LocalConnectRawDataBean data;
 
-    public CommonLocalInverterData(LocalConnectRawDataBean data) {
+    public CommonLocalDeviceData(LocalConnectRawDataBean data) {
         this.data = data;
     }
 

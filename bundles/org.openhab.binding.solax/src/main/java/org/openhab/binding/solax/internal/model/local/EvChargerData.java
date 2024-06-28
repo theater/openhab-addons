@@ -24,7 +24,7 @@ import org.openhab.binding.solax.internal.util.ByteUtil;
  * @author Konstantin Polihronov - Initial contribution
  */
 @NonNullByDefault
-public class EvChargerData extends CommonLocalInverterData {
+public class EvChargerData extends CommonLocalDeviceData {
 
     public EvChargerData(LocalConnectRawDataBean bean) {
         super(bean);

@@ -18,12 +18,12 @@ import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnec
 import org.openhab.binding.solax.internal.model.InverterType;
 
 /**
- * The {@link LocalInverterData} Interface for the parsed inverter data in meaningful format
+ * The {@link LocalData} Interface for the parsed inverter data in meaningful format
  *
  * @author Konstantin Polihronov - Initial contribution
  */
 @NonNullByDefault
-public interface LocalInverterData {
+public interface LocalData {
 
     @Nullable
     default String getWifiSerial() {

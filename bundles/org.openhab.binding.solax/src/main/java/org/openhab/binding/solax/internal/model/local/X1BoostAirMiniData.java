@@ -16,15 +16,15 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 
 /**
- * The {@link X1BoostAirMiniInverterData} is an implementation of the single phased inverter data interface for X1 Mini
+ * The {@link X1BoostAirMiniData} is an implementation of the single phased inverter data interface for X1 Mini
  * / X1 Air Mini or X1 Boost Mini inverter.
  *
  * @author Konstantin Polihronov - Initial contribution
  */
 @NonNullByDefault
-public class X1BoostAirMiniInverterData extends CommonLocalInverterData {
+public class X1BoostAirMiniData extends CommonLocalDeviceData {
 
-    public X1BoostAirMiniInverterData(LocalConnectRawDataBean data) {
+    public X1BoostAirMiniData(LocalConnectRawDataBean data) {
         super(data);
     }
 

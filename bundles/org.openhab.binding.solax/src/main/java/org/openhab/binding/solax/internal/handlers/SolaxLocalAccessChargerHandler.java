@@ -20,7 +20,7 @@ import org.openhab.binding.solax.internal.SolaxBindingConstants;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 import org.openhab.binding.solax.internal.exceptions.SolaxUpdateException;
 import org.openhab.binding.solax.internal.model.local.EvChargerData;
-import org.openhab.binding.solax.internal.model.local.LocalInverterData;
+import org.openhab.binding.solax.internal.model.local.LocalData;
 import org.openhab.binding.solax.internal.model.local.parsers.EvChargerDataParser;
 import org.openhab.binding.solax.internal.model.local.parsers.RawDataParser;
 import org.openhab.core.i18n.TimeZoneProvider;
@@ -60,7 +60,7 @@ public class SolaxLocalAccessChargerHandler extends SolaxLocalAccessAbstractHand
         updateProperties(data);
     }
 
-    private void updateProperties(LocalInverterData data) {
+    private void updateProperties(LocalData data) {
     }
 
     private void updateChannels(RawDataParser parser, EvChargerData data) {
@@ -99,7 +99,7 @@ public class SolaxLocalAccessChargerHandler extends SolaxLocalAccessAbstractHand
                 Units.WATT, supportedChannels);
         updateChannel(SolaxBindingConstants.CHANNEL_CHARGER_OUTPUT_POWER_PHASE3, data.getOutputPowerPhase3(),
                 Units.WATT, supportedChannels);
-        updateChannel(SolaxBindingConstants.CHANNEL_CHARGER_TOTAL_OUTPUT_POWER, data.getTotalOutputPower(), Units.WATT,
+        updateChannel(SolaxBindingConstants.CHANNEL_CHARGER_TOTAL_OUTPUT_POWER, data.getTotalChargePower(), Units.WATT,
                 supportedChannels);
 
         // Provider data

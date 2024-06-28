@@ -16,15 +16,15 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 
 /**
- * The {@link X3HybridG4InverterData} is an implementation of the single phased inverter data interface for X3 Hybrid G4
+ * The {@link X3HybridG4Data} is an implementation of the single phased inverter data interface for X3 Hybrid G4
  * inverter.
  *
  * @author Konstantin Polihronov - Initial contribution
  */
 @NonNullByDefault
-public class X3HybridG4InverterData extends CommonLocalInverterData {
+public class X3HybridG4Data extends CommonLocalDeviceData {
 
-    public X3HybridG4InverterData(LocalConnectRawDataBean data) {
+    public X3HybridG4Data(LocalConnectRawDataBean data) {
         super(data);
     }
 

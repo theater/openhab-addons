@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.solax.internal.SolaxBindingConstants;
 import org.openhab.binding.solax.internal.connectivity.rawdata.local.LocalConnectRawDataBean;
 import org.openhab.binding.solax.internal.model.InverterType;
-import org.openhab.binding.solax.internal.model.local.LocalInverterData;
+import org.openhab.binding.solax.internal.model.local.LocalData;
 import org.openhab.binding.solax.internal.model.local.parsers.RawDataParser;
 import org.openhab.core.i18n.TimeZoneProvider;
 import org.openhab.core.i18n.TranslationProvider;
@@ -62,7 +62,7 @@ public class SolaxLocalAccessInverterHandler extends SolaxLocalAccessAbstractHan
                     alreadyRemovedUnsupportedChannels = true;
                 }
 
-                LocalInverterData genericInverterData = parser.getData(rawDataBean);
+                LocalData genericInverterData = parser.getData(rawDataBean);
                 updateChannels(parser, genericInverterData);
                 updateProperties(genericInverterData);
             } else {
@@ -81,12 +81,12 @@ public class SolaxLocalAccessInverterHandler extends SolaxLocalAccessAbstractHan
         return InverterType.fromIndex(type);
     }
 
-    private void updateProperties(LocalInverterData genericInverterData) {
+    private void updateProperties(LocalData genericInverterData) {
         updateProperty(Thing.PROPERTY_SERIAL_NUMBER, genericInverterData.getWifiSerial());
         updateProperty(SolaxBindingConstants.PROPERTY_INVERTER_TYPE, genericInverterData.getInverterType().name());
     }
 
-    private void updateChannels(RawDataParser parser, LocalInverterData inverterData) {
+    private void updateChannels(RawDataParser parser, LocalData inverterData) {
         updateState(SolaxBindingConstants.CHANNEL_RAW_DATA, new StringType(inverterData.getRawData()));
 
         Set<String> supportedChannels = parser.getSupportedChannels();
