@@ -86,6 +86,11 @@ public class X3UltraData extends CommonLocalDeviceData {
         return ((double) getFromRawData(11)) / 10;
     }
 
+    @Override
+    public double getPV3Voltage() {
+        return ((double) getFromRawData(129)) / 10;
+    }
+
     // new not defined yet
     // @Override
     // public double getPV3Voltage() {
@@ -102,11 +107,10 @@ public class X3UltraData extends CommonLocalDeviceData {
         return ((double) getFromRawData(13)) / 10;
     }
 
-    // new not defined yet
-    // @Override
-    // public double getPV3Current() {
-    // return ((double) getFromRawData(130)) / 10;
-    // }
+    @Override
+    public double getPV3Current() {
+        return ((double) getFromRawData(130)) / 10;
+    }
 
     @Override
     public short getPV1Power() {
@@ -118,11 +122,10 @@ public class X3UltraData extends CommonLocalDeviceData {
         return getFromRawData(15);
     }
 
-    // new not defined yet
-    // @Override
-    // public short getPV3Power() {
-    // return getFromRawData(131);
-    // }
+    @Override
+    public short getPV3Power() {
+        return getFromRawData(131);
+    }
 
     @Override
     public double getFrequencyPhase1() {
@@ -146,55 +149,50 @@ public class X3UltraData extends CommonLocalDeviceData {
         return ((double) getFromRawData(39)) / 10;
     }
 
-    // new not defined yet
-    // @Override
-    // public double getBattery2Voltage() {
-    // return ((double) getFromRawData(132)) / 10;
-    // }
+    @Override
+    public double getBattery2Voltage() {
+        return ((double) getFromRawData(132)) / 10;
+    }
 
     @Override
     public double getBatteryCurrent() {
         return ((double) getFromRawData(40)) / 100;
     }
 
-    // new not defined yet
-    // @Override
-    // public double getBattery2Current() {
-    // return ((double) getFromRawData(133)) / 100;
-    // }
+    @Override
+    public double getBattery2Current() {
+        return ((double) getFromRawData(133)) / 100;
+    }
 
     @Override
     public short getBatteryPower() {
         return getFromRawData(41);
     }
 
-    // new not defined yet
-    // @Override
-    // public short getBattery2Power() {
-    // return getFromRawData(134);
-    // }
+    @Override
+    public short getBattery2Power() {
+        return getFromRawData(134);
+    }
 
     @Override
     public short getBatteryTemperature() {
         return getFromRawData(105);
     }
 
-    // new not defined yet
-    // @Override
-    // public short getBattery2Temperature() {
-    // return getFromRawData(142);
-    // }
+    @Override
+    public short getBattery2Temperature() {
+        return getFromRawData(142);
+    }
 
     @Override
     public short getBatteryLevel() {
         return getFromRawData(103);
     }
 
-    // new not defined yet
-    // @Override
-    // public short getBattery2Level() {
-    // return getFromRawData(140);
-    // }
+    @Override
+    public short getBattery2Level() {
+        return getFromRawData(140);
+    }
 
     // Feed in power
 

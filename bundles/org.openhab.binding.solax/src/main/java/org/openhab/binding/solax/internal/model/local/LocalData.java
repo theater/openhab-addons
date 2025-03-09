@@ -68,12 +68,24 @@ public interface LocalData {
         return Short.MIN_VALUE;
     }
 
+    default double getPV3Voltage() {
+        return Integer.MIN_VALUE;
+    }
+
+    default double getPV3Current() {
+        return Integer.MIN_VALUE;
+    }
+
+    default short getPV3Power() {
+        return Short.MIN_VALUE;
+    }
+
     default double getPVTotalPower() {
-        return getPV1Power() + getPV2Power();
+        return getPV1Power() + getPV2Power() + getPV3Power();
     }
 
     default double getPVTotalCurrent() {
-        return getPV1Current() + getPV2Current();
+        return getPV1Current() + getPV2Current() + getPV3Current();
     }
 
     default double getBatteryVoltage() {
@@ -92,15 +104,35 @@ public interface LocalData {
         return Short.MIN_VALUE;
     }
 
+    default short getBatteryLevel() {
+        return Short.MIN_VALUE;
+    }
+
+    default double getBattery2Voltage() {
+        return Integer.MIN_VALUE;
+    }
+
+    default double getBattery2Current() {
+        return Integer.MIN_VALUE;
+    }
+
+    default short getBattery2Power() {
+        return Short.MIN_VALUE;
+    }
+
+    default short getBattery2Temperature() {
+        return Short.MIN_VALUE;
+    }
+
+    default short getBattery2Level() {
+        return Short.MIN_VALUE;
+    }
+
     default short getInverterTemperature1() {
         return Short.MIN_VALUE;
     }
 
     default short getInverterTemperature2() {
-        return Short.MIN_VALUE;
-    }
-
-    default short getBatteryLevel() {
         return Short.MIN_VALUE;
     }
 
