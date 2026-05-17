@@ -15,6 +15,7 @@ package org.openhab.binding.paradoxalarm.internal.communication;
 import java.util.List;
 import java.util.Map;
 
+import org.openhab.binding.paradoxalarm.internal.model.ParadoxPanel;
 import org.openhab.binding.paradoxalarm.internal.model.ZoneStateFlags;
 
 /**
@@ -40,4 +41,6 @@ public interface IParadoxCommunicator extends IParadoxInitialLoginCommunicator {
     void initializeData();
 
     MemoryMap getMemoryMap();
+
+    void setPanel(ParadoxPanel panel);
 }

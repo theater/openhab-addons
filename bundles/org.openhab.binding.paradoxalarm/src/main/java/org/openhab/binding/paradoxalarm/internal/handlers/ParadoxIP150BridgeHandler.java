@@ -171,6 +171,7 @@ public class ParadoxIP150BridgeHandler extends BaseBridgeHandler
                 .withScheduler(scheduler).withEncryption(config.isEncrypt()).build();
 
         panel.setCommunicator(communicator);
+        communicator.setPanel(panel);
 
         Collection<IDataUpdateListener> listeners = Arrays.asList(panel, this);
         communicator.setListeners(listeners);

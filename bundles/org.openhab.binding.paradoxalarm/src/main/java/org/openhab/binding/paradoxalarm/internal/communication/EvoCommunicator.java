@@ -26,13 +26,16 @@ import java.util.concurrent.TimeUnit;
 import org.openhab.binding.paradoxalarm.internal.communication.messages.EpromRequestPayload;
 import org.openhab.binding.paradoxalarm.internal.communication.messages.HeaderMessageType;
 import org.openhab.binding.paradoxalarm.internal.communication.messages.IPayload;
+import org.openhab.binding.paradoxalarm.internal.communication.messages.LiveEvent;
 import org.openhab.binding.paradoxalarm.internal.communication.messages.ParadoxIPPacket;
 import org.openhab.binding.paradoxalarm.internal.communication.messages.RamRequestPayload;
 import org.openhab.binding.paradoxalarm.internal.exceptions.ParadoxException;
 import org.openhab.binding.paradoxalarm.internal.exceptions.ParadoxRuntimeException;
 import org.openhab.binding.paradoxalarm.internal.model.EntityType;
 import org.openhab.binding.paradoxalarm.internal.model.PanelType;
+import org.openhab.binding.paradoxalarm.internal.model.ParadoxPanel;
 import org.openhab.binding.paradoxalarm.internal.model.ZoneStateFlags;
+import org.openhab.binding.paradoxalarm.internal.parsers.EvoLiveEventParser;
 import org.openhab.binding.paradoxalarm.internal.util.ParadoxUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,6 +58,9 @@ public class EvoCommunicator extends GenericCommunicator implements IParadoxComm
     private PanelType panelType = PanelType.UNKNOWN;
     private Integer maxPartitions;
     private Integer maxZones;
+
+    private @org.eclipse.jdt.annotation.Nullable ParadoxPanel panel;
+    private final EvoLiveEventParser liveEventParser = new EvoLiveEventParser();
 
     private EvoCommunicator(String ipAddress, int tcpPort, String ip150Password, String pcPassword,
             ScheduledExecutorService scheduler, PanelType panelType, Integer maxPartitions, Integer maxZones,
@@ -326,6 +332,26 @@ public class EvoCommunicator extends GenericCommunicator implements IParadoxComm
     @Override
     public MemoryMap getMemoryMap() {
         return memoryMap;
+    }
+
+    @Override
+    public void setPanel(ParadoxPanel panel) {
+        this.panel = panel;
+    }
+
+    @Override
+    protected void handleLiveEvent(byte[] raw) {
+        ParadoxPanel currentPanel = panel;
+        if (currentPanel == null) {
+            return;
+        }
+        LiveEvent event = LiveEvent.parse(raw);
+        if (event == null) {
+            return;
+        }
+        if (liveEventParser.applyToModel(event, currentPanel)) {
+            updateListeners();
+        }
     }
 
     public Map<EntityType, Map<Integer, String>> getEntityLabelsMap() {

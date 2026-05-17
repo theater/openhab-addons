@@ -137,6 +137,10 @@ public abstract class AbstractCommunicator implements IParadoxInitialLoginCommun
             logger.trace("Found packet to receive in queue...");
             byte[] result = new byte[256];
             int readBytes = rx.read(result);
+            if (readBytes > 0 && (result[0] & 0xF0) == 0xE0 && (result[1] & 0xFF) == 0xFF) {
+                handleLiveEvent(Arrays.copyOfRange(result, 0, readBytes));
+                return;
+            }
             if (readBytes > 0 && result[1] > 0 && result[1] + 16 < 256) {
                 logger.trace("Successfully read valid packet from Rx");
                 IRequest request = syncQueue.poll();
@@ -203,5 +207,9 @@ public abstract class AbstractCommunicator implements IParadoxInitialLoginCommun
     @Override
     public void setStoListener(ISocketTimeOutListener stoListener) {
         this.stoListener = stoListener;
+    }
+
+    protected void handleLiveEvent(byte[] raw) {
+        // no-op — overridden in EvoCommunicator
     }
 }
