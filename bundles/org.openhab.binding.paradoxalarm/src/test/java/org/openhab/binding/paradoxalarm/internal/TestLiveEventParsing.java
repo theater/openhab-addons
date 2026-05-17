@@ -174,16 +174,9 @@ public class TestLiveEventParsing {
     }
 
     @Test
-    public void testDetectionRejectsNonLiveEventPacket() {
+    public void testDetectionRejectsNonEHighNibblePacket() {
         byte[] notLive = ZONE_OPENED.clone();
         notLive[0] = 0x00;
-        assertNull(LiveEvent.parse(notLive));
-    }
-
-    @Test
-    public void testDetectionRejectsWrongMarkerByte() {
-        byte[] notLive = ZONE_OPENED.clone();
-        notLive[1] = 0x00;
         assertNull(LiveEvent.parse(notLive));
     }
 

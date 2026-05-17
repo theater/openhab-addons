@@ -178,10 +178,13 @@ public class EvoCommunicator extends GenericCommunicator implements IParadoxComm
 
     @Override
     public ZoneStateFlags getZoneStateFlags() {
-        ZoneStateFlags result = new ZoneStateFlags();
-
         byte[] firstPage = memoryMap.getElement(0);
         byte[] secondPage = memoryMap.getElement(8);
+        if (firstPage.length < RAM_BLOCK_SIZE
+                || (PanelType.isBigRamEvo(panelType) && secondPage.length < RAM_BLOCK_SIZE)) {
+            return null;
+        }
+        ZoneStateFlags result = new ZoneStateFlags();
         createZoneOpenedFlags(result, firstPage, secondPage);
         createZoneTamperedFlags(result, firstPage, secondPage);
         createZoneLowbatteryFlags(result, firstPage, secondPage);

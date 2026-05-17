@@ -137,9 +137,25 @@ public abstract class AbstractCommunicator implements IParadoxInitialLoginCommun
             logger.trace("Found packet to receive in queue...");
             byte[] result = new byte[256];
             int readBytes = rx.read(result);
-            if (readBytes > 0 && (result[0] & 0xF0) == 0xE0 && (result[1] & 0xFF) == 0xFF) {
-                handleLiveEvent(Arrays.copyOfRange(result, 0, readBytes));
-                return;
+            // IP150 packets have a 16-byte header; the panel payload starts at byte 16.
+            // Live event packets from the EVO panel have command byte 0xEX at payload[0] (= result[16])
+            // and 0xFF at payload[1] (= result[17]).
+            if (isOnline && readBytes > 17) {
+                // Decrypt the payload portion before inspecting the command nibble, so we don't accidentally
+                // match encrypted bytes that happen to start with 0xEX.
+                byte[] rawPayload = Arrays.copyOfRange(result, 16, readBytes);
+                byte[] payload = isEncrypted()
+                        ? org.openhab.binding.paradoxalarm.internal.communication.crypto.EncryptionHandler.getInstance()
+                                .decrypt(rawPayload)
+                        : rawPayload;
+                if ((payload[0] & 0xF0) == 0xE0) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("Unsolicited 0xE_ packet: byte[0]=0x{} byte[1]=0x{}",
+                                String.format("%02X", payload[0] & 0xFF), String.format("%02X", payload[1] & 0xFF));
+                    }
+                    handleLiveEvent(payload);
+                    return;
+                }
             }
             if (readBytes > 0 && result[1] > 0 && result[1] + 16 < 256) {
                 logger.trace("Successfully read valid packet from Rx");

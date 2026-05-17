@@ -28,11 +28,11 @@ public abstract class Entity {
     private int id;
     private String label;
 
-    public Entity(ParadoxPanel panel, int id, String label) {
+    public Entity(ParadoxPanel panel, int id, @org.eclipse.jdt.annotation.Nullable String label) {
         this.panel = panel;
         this.id = id;
-        this.label = label.trim();
-        logger.debug("Creating entity with label: {} and ID: {}", label, id);
+        this.label = label != null ? label.trim() : "Entity " + id;
+        logger.debug("Creating entity with label: {} and ID: {}", this.label, id);
     }
 
     public int getId() {

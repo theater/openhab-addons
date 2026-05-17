@@ -68,7 +68,7 @@ public class LiveEvent {
         if (raw == null || raw.length < MIN_LENGTH) {
             return null;
         }
-        if ((raw[0] & 0xF0) != 0xE0 || (raw[1] & 0xFF) != 0xFF) {
+        if ((raw[0] & 0xF0) != 0xE0) {
             return null;
         }
 

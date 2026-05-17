@@ -30,6 +30,7 @@ public interface IParadoxCommunicator extends IParadoxInitialLoginCommunicator {
 
     List<byte[]> getPartitionFlags();
 
+    @org.eclipse.jdt.annotation.Nullable
     ZoneStateFlags getZoneStateFlags();
 
     void executeCommand(String commandAsString);
