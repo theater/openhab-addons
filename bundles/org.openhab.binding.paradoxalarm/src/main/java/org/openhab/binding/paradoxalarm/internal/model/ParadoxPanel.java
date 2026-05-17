@@ -186,7 +186,7 @@ public class ParadoxPanel implements IDataUpdateListener {
         return dcLevel;
     }
 
-    public ZonedDateTime getPanelTime() {
+    public @org.eclipse.jdt.annotation.Nullable ZonedDateTime getPanelTime() {
         return panelTime;
     }
 
