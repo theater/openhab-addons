@@ -48,6 +48,8 @@ public class EvoCommunicator extends GenericCommunicator implements IParadoxComm
 
     private static final byte RAM_BLOCK_SIZE = (byte) 64;
 
+    private static final int INITIAL_RAM_DELAY_SECONDS = 5;
+
     private final Logger logger = LoggerFactory.getLogger(EvoCommunicator.class);
 
     private MemoryMap memoryMap;
@@ -359,8 +361,8 @@ public class EvoCommunicator extends GenericCommunicator implements IParadoxComm
     public void initializeData() {
         synchronized (SyncQueue.getInstance()) {
             initializeEpromData();
-            submitRamRequests();
         }
+        scheduler.schedule(this::submitRamRequests, INITIAL_RAM_DELAY_SECONDS, TimeUnit.SECONDS);
     }
 
     private void initializeEpromData() {

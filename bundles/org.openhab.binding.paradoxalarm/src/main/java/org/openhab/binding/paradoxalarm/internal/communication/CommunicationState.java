@@ -314,9 +314,11 @@ public enum CommunicationState implements IResponseReceiver {
         @Override
         protected void runPhase(IParadoxInitialLoginCommunicator communicator, Object... args) {
             if (communicator instanceof IParadoxCommunicator comm) {
-                // initializeData() only queues requests — responses arrive asynchronously.
+                // initializeData() queues EPROM label requests and schedules the first RAM
+                // read with a short delay so the IP150+ TCP buffer is not overwhelmed
+                // immediately after the login handshake completes.
                 // Transition to ONLINE is deferred until the first complete RAM read cycle
-                // completes (see EvoCommunicator.receiveRamResponse).
+                // finishes (see EvoCommunicator.receiveRamResponse).
                 comm.initializeData();
             } else {
                 nextState().runPhase(communicator);
